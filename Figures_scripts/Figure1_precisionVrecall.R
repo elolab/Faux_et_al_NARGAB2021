@@ -57,7 +57,7 @@ myfunction <- function(grange){
 
 
 #load clean and call the main function to prepare the data for the pROC calls
-temp <- read.table(paste0("Request_Laura/DiffBind_synthetic.bed"), header=T)
+temp <- read.table(paste0("DiffBind_synthetic.bed"), header=T)
 temp <- temp[,1:4]
 temp <- cbind(temp,c(1:8683))
 colnames(temp) <- c("space","start","end","pvalue", "rank") 
@@ -65,7 +65,7 @@ colnames(temp) <- c("space","start","end","pvalue", "rank")
 temp <- myfunction(temp)
 assign("DiffBind",temp)
 
-temp <- read.table(paste0("Request_Laura/THOR_synthetic.bed"), header=T)
+temp <- read.table(paste0("THOR_synthetic.bed"), header=T)
 temp <- temp[,1:4]
 temp <- cbind(temp,c(1:17597))
 colnames(temp) <- c("space","start","end","pvalue", "rank") 
@@ -73,7 +73,7 @@ colnames(temp) <- c("space","start","end","pvalue", "rank")
 temp <- myfunction(temp)
 assign("THOR",temp)
 
-temp <- read.table(paste0("Request_Laura/diffReps_synthetic.bed"), header=T)
+temp <- read.table(paste0("diffReps_synthetic.bed"), header=T)
 temp <- temp[,1:4]
 temp <- cbind(temp,c(1:8866))
 colnames(temp) <- c("space","start","end","pvalue", "rank") 
@@ -81,7 +81,7 @@ colnames(temp) <- c("space","start","end","pvalue", "rank")
 temp <- myfunction(temp)
 assign("diffReps",temp)
 
-temp <- read.table(paste0("Request_Laura/ROTS_synthetic.bed"), header=T)
+temp <- read.table(paste0("ROTS_synthetic.bed"), header=T)
 temp <- temp[,1:4]
 temp <- cbind(temp,c(1:11112))
 colnames(temp) <- c("space","start","end","pvalue", "rank") 
@@ -89,7 +89,7 @@ colnames(temp) <- c("space","start","end","pvalue", "rank")
 temp <- myfunction(temp)
 assign("ROTS",temp)
 
-temp <- read.table(paste0("Request_Laura/PePr_synthetic.bed"), header=T)
+temp <- read.table(paste0("PePr_synthetic.bed"), header=T)
 temp <- temp[,1:4]
 temp <- cbind(temp,c(1:6660))
 colnames(temp) <- c("space","start","end","pvalue", "rank") 
@@ -98,7 +98,7 @@ temp <- myfunction(temp)
 assign("PePr",temp)
 
 
-temp <- read.table(paste0("Request_Laura/MAnorm2_synthetic.bed"), header=T)
+temp <- read.table(paste0("MAnorm2_synthetic.bed"), header=T)
 #temp <- temp[which(temp$V8 <= 0.05),]
 #colnames(temp) <- c("space","start","end","name","score","strand","pval","qval","fc")
 #temp <- temp[order(temp$pval),]
