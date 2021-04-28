@@ -7,6 +7,7 @@ library(ChIPpeakAnno)
 ##############
 setwd("/Users/thfaux/Library/Group Containers/G69SCX94XU.duck/Library/Application Support/duck/Volumes/khgfgyt-1/wrk/asta/epouta/thomas_projects/B18070_Differential_ChIPseq_peak_calling/Global_Rerun/Results_comparison/Synthetic")
 load("H3K36me3_bindingEvents_data.RData")
+setwd("~/Library/Group Containers/G69SCX94XU.duck/Library/Application Support/duck/Volumes/khgfgyt-1/wrk/asta/epouta/thomas_projects/B18070_Differential_ChIPseq_peak_calling/Global_Rerun/Final_plots/ROC_curves")
 
 
 myfunction <- function(grange){
@@ -43,7 +44,7 @@ myfunction <- function(grange){
   colnames(dfol1) <- c("prediction", "rank", "duplicated")
   
   #create the return object
-  vec <- data.frame(rank=rep(0,20000),pvalue=rep(0,20000))
+  vec <- data.frame(rank=rep(1,20000),pvalue=rep(1,20000))
   
   #Put the rank and pvalue for each detected peak
   for(i in 1:dim(dfol1)[1]){
@@ -51,45 +52,53 @@ myfunction <- function(grange){
     vec[dfol1$rank[i],"pvalue"] <- temp[dfol1$prediction[i],"pvalue"]
     }
   
+  #Put a high rank to the peaks that are not found
+
+  for(i in 1:dim(vec)[1]){
+    if(vec$rank[i] ==1 && vec$pvalue[i] ==1){
+      vec[i,"rank"] <- max(vec$rank) + 1
+    }
+      
+  }
   return(vec)
 }
 
 
 
 #load clean and call the main function to prepare the data for the pROC calls
-temp <- read.table(paste0("DiffBind_synthetic.bed"), header=T)
+temp <- read.table(paste0("Full_results/DiffBind_synthetic_full.bed"), header=T)
 temp <- temp[,1:4]
-temp <- cbind(temp,c(1:8683))
+temp <- cbind(temp,c(1:28647))
 colnames(temp) <- c("space","start","end","pvalue", "rank") 
 #temp <- toGRanges(temp, format="BED", header=FALSE) 
 temp <- myfunction(temp)
 assign("DiffBind",temp)
 
-temp <- read.table(paste0("THOR_synthetic.bed"), header=T)
+temp <- read.table(paste0("Full_results/THOR_synthetic_full.bed"), header=T)
 temp <- temp[,1:4]
-temp <- cbind(temp,c(1:17597))
+temp <- cbind(temp,c(1:169399))
 colnames(temp) <- c("space","start","end","pvalue", "rank") 
 #temp <- toGRanges(temp, format="BED", header=FALSE) 
 temp <- myfunction(temp)
 assign("THOR",temp)
 
-temp <- read.table(paste0("diffReps_synthetic.bed"), header=T)
+temp <- read.table(paste0("Full_results/diffReps_synthetic_full.bed"), header=T)
 temp <- temp[,1:4]
-temp <- cbind(temp,c(1:8866))
+temp <- cbind(temp,c(1:72450))
 colnames(temp) <- c("space","start","end","pvalue", "rank") 
 #temp <- toGRanges(temp, format="BED", header=FALSE) 
 temp <- myfunction(temp)
 assign("diffReps",temp)
 
-temp <- read.table(paste0("ROTS_synthetic.bed"), header=T)
+temp <- read.table(paste0("Full_results/ROTS_synthetic_full.bed"), header=T)
 temp <- temp[,1:4]
-temp <- cbind(temp,c(1:11112))
+temp <- cbind(temp,c(1:31563))
 colnames(temp) <- c("space","start","end","pvalue", "rank") 
 #temp <- toGRanges(temp, format="BED", header=FALSE) 
 temp <- myfunction(temp)
 assign("ROTS",temp)
 
-temp <- read.table(paste0("PePr_synthetic.bed"), header=T)
+temp <- read.table(paste0("Request_Laura/PePr_synthetic.bed"), header=T)
 temp <- temp[,1:4]
 temp <- cbind(temp,c(1:6660))
 colnames(temp) <- c("space","start","end","pvalue", "rank") 
@@ -98,12 +107,12 @@ temp <- myfunction(temp)
 assign("PePr",temp)
 
 
-temp <- read.table(paste0("MAnorm2_synthetic.bed"), header=T)
+temp <- read.table(paste0("Full_results/MAnorm2_synthetic_full.bed"), header=T)
 #temp <- temp[which(temp$V8 <= 0.05),]
 #colnames(temp) <- c("space","start","end","name","score","strand","pval","qval","fc")
 #temp <- temp[order(temp$pval),]
 temp <- temp[,1:4]
-temp <- cbind(temp,c(1:10272))
+temp <- cbind(temp,c(1:32543))
 colnames(temp) <- c("space","start","end","pvalue","rank") 
 #temp <- toGRanges(temp, format="BED", header=FALSE) 
 temp <- myfunction(temp)
@@ -123,6 +132,13 @@ pROC::plot.roc(truth,  MAnorm2$rank,percent=TRUE,print.auc=TRUE,col="violet",lwd
 
 legend("bottomright", legend=c("ROTS", "DiffBind_DEseq2","MAnorm2","diffReps","PePr","THOR"), col=c("black", "blue","violet","green","red","orange"), lwd=2)
 
+results <- pROC::roc(truth~ROTS$pvalue,percent=TRUE)
+pROC::plot.roc(results, print.auc=TRUE, col="black",lwd=2,lty=6,print.auc.y = .9, print.auc.x = .85, direction = "<", smooth=FALSE)
+pROC::plot.roc(truth,  THOR$pvalue,percent=TRUE,print.auc=TRUE, col="orange",lwd=2,lty=6,print.auc.y = .8, print.auc.x = .9,add = TRUE, direction = "<", smooth=FALSE)
+pROC::plot.roc(truth,  PePr$pvalue,percent=TRUE,print.auc=TRUE, col="red",lwd=2,lty=1,print.auc.y = .675, print.auc.x = .8,add = TRUE, direction = "<", smooth=FALSE)
+pROC::plot.roc(truth,  diffReps$pvalue,percent=TRUE,print.auc=TRUE,col="green",lwd=2,lty=6,print.auc.y = .55, print.auc.x = .95,add = TRUE, direction = "<", smooth=FALSE)
+pROC::plot.roc(truth,  DiffBind$pvalue,percent=TRUE,print.auc=TRUE,col="blue",lwd=2,lty=2,print.auc.y = .7, print.auc.x = .8,add = TRUE, direction = "<", smooth=FALSE)
+pROC::plot.roc(truth,  MAnorm2$pvalue,percent=TRUE,print.auc=TRUE,col="violet",lwd=2,lty=2,print.auc.y = .775, print.auc.x = .95,add = TRUE, direction = "<", smooth=FALSE)
 
 
 #precision vs recall call
@@ -186,7 +202,7 @@ df <- data.frame(chr=seqnames(bindings),
                  
                  
 write.table(x = df, 
-            file = "truth_table.bed", 
+            file = "truth_table_full.bed", 
             quote = F , 
             col.names = T , 
             row.names = F , 
