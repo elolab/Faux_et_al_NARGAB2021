@@ -9,7 +9,6 @@ setwd("/Users/thfaux/Library/Group Containers/G69SCX94XU.duck/Library/Applicatio
 load("H3K36me3_bindingEvents_data.RData")
 setwd("~/Library/Group Containers/G69SCX94XU.duck/Library/Application Support/duck/Volumes/khgfgyt-1/wrk/asta/epouta/thomas_projects/B18070_Differential_ChIPseq_peak_calling/Global_Rerun/Final_plots/ROC_curves")
 
-
 myfunction <- function(grange){
   ####
   #### Counts the number of overlap for each downsampling level and return a vector of the values
@@ -60,6 +59,14 @@ myfunction <- function(grange){
     }
       
   }
+  
+  #recalculate the rank to get 1 to 20000
+  vec$trueorder <- 1:20000
+  vec <- vec[order(vec$rank),]
+  vec$rank <- 1:20000
+  vec <- vec[order(vec$trueorder),]
+  vec <- vec[,c(1,2)]
+  
   return(vec)
 }
 
@@ -98,10 +105,12 @@ colnames(temp) <- c("space","start","end","pvalue", "rank")
 temp <- myfunction(temp)
 assign("ROTS",temp)
 
-temp <- read.table(paste0("Request_Laura/PePr_synthetic.bed"), header=T)
+temp <- read.table(paste0("Full_results/PePr_synthetic_full.bed"), header=T)
 temp <- temp[,1:4]
-temp <- cbind(temp,c(1:6660))
+
+temp <- cbind(temp,c(1:656027))
 colnames(temp) <- c("space","start","end","pvalue", "rank") 
+temp <- temp[order(temp$pvalue),]
 #temp <- toGRanges(temp, format="BED", header=FALSE) 
 temp <- myfunction(temp)
 assign("PePr",temp)
@@ -207,3 +216,4 @@ write.table(x = df,
             col.names = T , 
             row.names = F , 
             sep = "\t" )
+summary(df)
