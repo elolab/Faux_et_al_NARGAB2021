@@ -1,0 +1,17 @@
+SampleID,Tissue,Condition,Replicate,bamReads,Peaks
+Na1,CD8_Tcells,Naive,1,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839476_marked_woblr.bam,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/naive/naive_DB_woblr.bed
+Na2,CD8_Tcells,Naive,2,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839477_marked_woblr.bam,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/naive/naive_DB_woblr.bed
+Na3,CD8_Tcells,Naive,3,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839478_marked_woblr.bam,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/naive/naive_DB_woblr.bed
+Na4,CD8_Tcells,Naive,4,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839479_marked_woblr.bam,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/naive/naive_DB_woblr.bed
+Na5,CD8_Tcells,Naive,5,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839480_marked_woblr.bam,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/naive/naive_DB_woblr.bed
+Na6,CD8_Tcells,Naive,6,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839481_marked_woblr.bam,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/naive/naive_DB_woblr.bed
+Na7,CD8_Tcells,Naive,7,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839482_marked_woblr.bam,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/naive/naive_DB_woblr.bed
+Na8,CD8_Tcells,Naive,8,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839483_marked_woblr.bam,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/naive/naive_DB_woblr.bed
+Va1,CD8_Tcells,Vaccinated,1,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839491_marked_woblr.bam,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/vaccinated/vaccinated_DB_woblr.bed
+Va2,CD8_Tcells,Vaccinated,2,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839493_marked_woblr.bam,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/vaccinated/vaccinated_DB_woblr.bed
+Va3,CD8_Tcells,Vaccinated,3,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839493_marked_woblr.bam,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/vaccinated/vaccinated_DB_woblr.bed
+Va4,CD8_Tcells,Vaccinated,4,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839494_marked_woblr.bam,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/vaccinated/vaccinated_DB_woblr.bed
+Va5,CD8_Tcells,Vaccinated,5,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839495_marked_woblr.bam,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/vaccinated/vaccinated_DB_woblr.bed
+Va6,CD8_Tcells,Vaccinated,6,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839496_marked_woblr.bam,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/vaccinated/vaccinated_DB_woblr.bed
+Va7,CD8_Tcells,Vaccinated,7,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839497_marked_woblr.bam,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/vaccinated/vaccinated_DB_woblr.bed
+Va8,CD8_Tcells,Vaccinated,8,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839498_marked_woblr.bam,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/vaccinated/vaccinated_DB_woblr.bed

@@ -1,0 +1,11 @@
+SampleID,Tissue,Factor,Condition,Replicate,bamReads,Peaks,PeakCaller
+r11,r1,H3K36me,Chip1,1,../data/MCF7_H3K36me3_pooled_sorted_control_merged_sorted.1.bam,../MACS2/Control_rep1/Control_rep1_DBpeaks.broadPeak,MACS
+r21,r2,H3K36me,Chip1,2,../data/MCF7_H3K36me3_pooled_sorted_control_merged_sorted.2.bam,../MACS2/Control_rep2/Control_rep2_DBpeaks.broadPeak,MACS
+r31,r3,H3K36me,Chip1,3,../data/MCF7_H3K36me3_pooled_sorted_control_merged_sorted.3.bam,../MACS2/Control_rep3/Control_rep3_DBpeaks.broadPeak,MACS
+r41,r4,H3K36me,Chip1,4,../data/MCF7_H3K36me3_pooled_sorted_control_merged_sorted.4.bam,../MACS2/Control_rep4/Control_rep4_DBpeaks.broadPeak,MACS
+r51,r5,H3K36me,Chip1,5,../data/MCF7_H3K36me3_pooled_sorted_control_merged_sorted.5.bam,../MACS2/Control_rep5/Control_rep5_DBpeaks.broadPeak,MACS
+r12,r1,H3K36me,Chip2,1,../data/MCF7_H3K36me3_pooled_sorted_downsampled_merged_sorted.1.bam,../MACS2/Chip_rep1/Chip_rep1_DBpeaks.broadPeak,MACS
+r22,r2,H3K36me,Chip2,2,../data/MCF7_H3K36me3_pooled_sorted_downsampled_merged_sorted.2.bam,../MACS2/Chip_rep2/Chip_rep2_DBpeaks.broadPeak,MACS
+r32,r3,H3K36me,Chip2,3,../data/MCF7_H3K36me3_pooled_sorted_downsampled_merged_sorted.3.bam,../MACS2/Chip_rep3/Chip_rep3_DBpeaks.broadPeak,MACS
+r42,r4,H3K36me,Chip2,4,../data/MCF7_H3K36me3_pooled_sorted_downsampled_merged_sorted.4.bam,../MACS2/Chip_rep4/Chip_rep4_DBpeaks.broadPeak,MACS
+r52,r5,H3K36me,Chip2,5,../data/MCF7_H3K36me3_pooled_sorted_downsampled_merged_sorted.5.bam,../MACS2/Chip_rep5/Chip_rep5_DBpeaks.broadPeak,MACS

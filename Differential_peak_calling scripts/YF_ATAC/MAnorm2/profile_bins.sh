@@ -1,0 +1,18 @@
+#!/bin/sh
+
+sbatch <<EOF
+#!/bin/bash
+#SBATCH --error "logs.err"
+#SBATCH --output "logs.out"
+#SBATCH --cpus-per-task=10
+#SBATCH --partition="normal"
+#SBATCH --mem=100000
+#SBATCH --ntasks 1
+#SBATCH --job-name "profile_bins_H3K4"
+
+source /wrk/asta/epouta/thomas_projects/B18070_Differential_ChIPseq_peak_calling/pythonenv/python2.xenv/bin/activate
+
+profile_bins --peaks=../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/naive/naive_peaks_woblr.narrowPeak,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/naive/naive_peaks_woblr.narrowPeak,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/naive/naive_peaks_woblr.narrowPeak,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/naive/naive_peaks_woblr.narrowPeak,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/naive/naive_peaks_woblr.narrowPeak,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/naive/naive_peaks_woblr.narrowPeak,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/naive/naive_peaks_woblr.narrowPeak,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/naive/naive_peaks_woblr.narrowPeak,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/vaccinated/vaccinated_peaks_woblr.narrowPeak,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/vaccinated/vaccinated_peaks_woblr.narrowPeak,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/vaccinated/vaccinated_peaks_woblr.narrowPeak,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/vaccinated/vaccinated_peaks_woblr.narrowPeak,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/vaccinated/vaccinated_peaks_woblr.narrowPeak,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/vaccinated/vaccinated_peaks_woblr.narrowPeak,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/vaccinated/vaccinated_peaks_woblr.narrowPeak,../../../ChIP-seq_analysis/ATAC-seq/report/MACS2/narrow_pooled_woblr/vaccinated/vaccinated_peaks_woblr.narrowPeak \
+--reads=../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839476_marked_woblr.bam.bed,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839477_marked_woblr.bam.bed,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839478_marked_woblr.bam.bed,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839479_marked_woblr.bam.bed,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839480_marked_woblr.bam.bed,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839481_marked_woblr.bam.bed,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839482_marked_woblr.bam.bed,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839483_marked_woblr.bam.bed,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839491_marked_woblr.bam.bed,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839492_marked_woblr.bam.bed,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839493_marked_woblr.bam.bed,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839494_marked_woblr.bam.bed,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839495_marked_woblr.bam.bed,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839496_marked_woblr.bam.bed,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839497_marked_woblr.bam.bed,../../../ChIP-seq_analysis/ATAC-seq/6-marked-sorted_BAM/SRR5839498_marked_woblr.bam.bed \
+--labs=s76,s77,s78,s79,s80,s81,s82,s83,s91,s92,s93,s94,s95,s96,s97,s98 -n=SRR58394
+EOF
