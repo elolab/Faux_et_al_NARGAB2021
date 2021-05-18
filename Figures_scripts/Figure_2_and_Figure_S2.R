@@ -175,25 +175,9 @@ K36_05 <- main_function(K36_DB,K36_ROTS,K36_MAnorm,K36_DR,K36_PePr,K36_THOR,"K36
 
 col4 <- colorRampPalette(c("#7F0000","red","#FF7F00","yellow","#7FFF7F", "cyan", "#007FFF", "blue","#00007F")) 
 
-pdf("correlogramme_005_IFN_MAnorm_pooled.pdf",width=12,height = 12)
-par(cex = 2)
-corrplot(IFN_05,p.mat=IFN_05,cl.lim=c(0,1), col = col4(500),sig.level = -1,insig = "p-value",tl.col ='black',na.label = 0)
-dev.off()
-
-pdf("correlogramme_005_YF_MAnorm_pooled.pdf",width=12,height = 12)
-par(cex = 2)
-corrplot(YF_05,p.mat=YF_05,cl.lim=c(0,1), col = col4(500),sig.level = -1,insig = "p-value",tl.col ='black',na.label = 0)
-dev.off()
-
-pdf("correlogramme_005_K4_MAnorm_pooled.pdf",width=12,height = 12)
-par(cex = 2)
-corrplot(K4_05,p.mat=K4_05,cl.lim=c(0,1), col = col4(500),sig.level = -1,insig = "p-value",tl.col ='black',na.label = 0)
-dev.off()
-
-pdf("correlogramme_005_K36_MAnorm_pooled.pdf",width=12,height = 12)
-par(cex = 2)
-corrplot(K36_05,p.mat=K36_2000,cl.lim=c(0,1), col = col4(500),sig.level = -1,insig = "p-value",tl.col ='black',na.label = 0)
-dev.off()
+#############################################################
+###                   figure 2                            ###
+#############################################################
 
 pdf("correlogramme_2000_IFN_MAnorm_pooled.pdf",width=12,height = 12)
 par(cex = 2)
@@ -214,3 +198,29 @@ pdf("correlogramme_2000_K36_MAnorm_pooled.pdf",width=12,height = 12)
 par(cex = 2)
 corrplot(K36_2000,p.mat=K36_2000,cl.lim=c(0,1), col = col4(500),sig.level = -1,insig = "p-value",tl.col ='black',na.label = 0)
 dev.off()
+
+#############################################################
+###            Supplementary Figure 2                     ###
+#############################################################
+
+pdf("correlogramme_005_IFN_MAnorm_pooled.pdf",width=12,height = 12)
+par(cex = 2)
+corrplot(IFN_05,p.mat=IFN_05,cl.lim=c(0,1), col = col4(500),sig.level = -1,insig = "p-value",tl.col ='black',na.label = 0)
+dev.off()
+
+pdf("correlogramme_005_YF_MAnorm_pooled.pdf",width=12,height = 12)
+par(cex = 2)
+corrplot(YF_05,p.mat=YF_05,cl.lim=c(0,1), col = col4(500),sig.level = -1,insig = "p-value",tl.col ='black',na.label = 0)
+dev.off()
+
+pdf("correlogramme_005_K4_MAnorm_pooled.pdf",width=12,height = 12)
+par(cex = 2)
+corrplot(K4_05,p.mat=K4_05,cl.lim=c(0,1), col = col4(500),sig.level = -1,insig = "p-value",tl.col ='black',na.label = 0)
+dev.off()
+
+pdf("correlogramme_005_K36_MAnorm_pooled.pdf",width=12,height = 12)
+par(cex = 2)
+corrplot(K36_05,p.mat=K36_2000,cl.lim=c(0,1), col = col4(500),sig.level = -1,insig = "p-value",tl.col ='black',na.label = 0)
+dev.off()
+
+

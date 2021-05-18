@@ -1,5 +1,6 @@
 png("YF_density_pp.png", width = 1200,height = 1200)
 
+#Load the read counts, the counts are splited in 100 bins
 load("RData/YF_ATAC/YF_DR.RData")
 YF_DR <- DR
 load("RData/YF_ATAC/YF_DB_pp.RData")
@@ -33,10 +34,6 @@ plot(x=seq(-2000, 1960, length.out=100),
      cex.axis=4,
      xaxt="n",
      xlab=' ')
-
-#legend("topleft", legend = c("ROTS", "DiffBind","PePr","diffReps","THOR"),
-#       col = c("orange","blue","red","green","black"),
-#       lty = 1, lwd = 2, box.col = "white", bg = "white", text.font  = 2)
 
 peaks<- YF_MAnorm
 soft <- "MAnorm_pp"
@@ -166,9 +163,7 @@ plot(x=seq(-2000, 1960, length.out=100),
      xaxt="n",
      xlab=' ')
 
-#legend("topleft", legend = c("ROTS", "DiffBind","PePr","diffReps","THOR"),
-#       col = c("black","blue","red","green","orange"),
-#       lty = 1, lwd = 2, box.col = "white", bg = "white", text.font  = 2)
+
 peaks<- K36_MAnorm
 soft <- "MAnorm_pp"
 nbtiles<-100
@@ -312,10 +307,7 @@ lines(x=seq(-2000, 1960, length.out=100),
       y=colMeans(rbind(sumlist[[1]],sumlist[[2]])),
       ty='l',
       col='black',lwd=4)
-#plot.new()
-#legend("topleft", legend = c("DiffBind","ROTS","diffReps","PePr","THOR"),
-#       col = c("blue","orange","green","red","black"),
-#       lty = 1, lwd = 2, box.col = "white", bg = "white", text.font  = 2)
+
 peaks<- K4_MAnorm
 soft <- "MAnorm_pp"
 nbtiles<-100

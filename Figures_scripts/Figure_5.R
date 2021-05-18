@@ -3,7 +3,6 @@ plot_correlation <- function(ROTS_anno,DB_anno,MA_anno,DR_anno,PePr_anno,THOR_an
 ROTS <- as.data.frame(ROTS_anno)
 DB <- as.data.frame(DB_anno)
 MAnorm <- as.data.frame(MA_anno)
-#MAnorm$fc <- MAnorm$fc*(-1)
 DR <- as.data.frame(DR_anno)
 DR <- DR[order(DR$FDR, decreasing = F),]
 DR$rank <- 1:dim(DR)[1]
@@ -100,7 +99,6 @@ for(i in seq(100,2000,100)){
 
 pdf(paste0(dataset,"correlation_toplist_narrow_pooledpeaks_aggregated_2000.pdf"),width =12,height =12)
 par(mar = c(4, 5, 4, 4))
-#layout(matrix(c(1,2), 1, 2), widths=c(3,1))
 
 plot(cor_PePr ,lwd=4, col = "red",type="l", ylim=c(0,1), ylab ="Pearson correlation",mgp = c(3,0.5,0),xlab = " ", main=" ", xaxt="n",cex.axis =3, cex.lab=3)
 lines(cor_DB,  lwd=4, col="blue")
@@ -114,13 +112,6 @@ axis(side=1, at=xtick,labels = FALSE)
 text(x=xtick,  par("usr")[3], 
      labels = xlabs, pos = 1, xpd = TRUE, offset=2 , cex=3)
 
-
-
-
-#plot.new()
-#legend("left", legend = c("ROTS", "DiffBind","PePr","diffReps","THOR"),
-#      col = c("orange","blue","red","green","black"),
-#      lty = 1, lwd = 2, box.col = "white", bg = "white", text.font  = 2)
 dev.off()
 }
 
