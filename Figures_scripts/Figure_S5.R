@@ -1,8 +1,3 @@
-deduplicate <- function(test){
-  test <- test[!duplicated(test$gene_name),]
-  return(test)
-}
-
 super_scatter_toplist <- function(TABLE, xlim=NULL, ylim=NULL, size=1, main="No title", method="pearson"){
   
   plot(deduplicate(TABLE)$fc[1:size],
@@ -62,57 +57,11 @@ THOR <- THOR[order(THOR$FDR, decreasing = F),]
 THOR_agg <- aggregate(x=THOR[,c("fc")],by = list(THOR$gene_name,THOR$logFC,THOR$rank), FUN=mean)
 colnames(THOR_agg) <- c("gene_name","logFC","rank","fc")
 
-
-###################################################################################
-#correlation x first of the top list with agregated fold change
-mycorrelation_toplist <- function(table,size,method){
-  mycor<-round(
-    cor(
-      deduplicate(table)$fc[1:size],
-      deduplicate(table)$logFC[1:size],
-      method = method
-    ),
-    digits = 3
-  )
-  return(mycor)
-}
-
 #remove the peaks that are annotated to the same genes (takes the first occurence)
 deduplicate <- function(test){
   test <- test[!duplicated(test$gene_name),]
   return(test)
 }
-
-cor_ROTS <- c()
-cor_DB <- c()
-cor_DR <- c()
-cor_THOR <- c()
-cor_PePr <- c()
-for(i in seq(100,2000,100)){
-  cor_ROTS <- c(cor_ROTS,mycorrelation_toplist(ROTS_agg,i,"pearson"))
-  cor_DB <- c(cor_DB,mycorrelation_toplist(DB_agg,i,"pearson"))
-  cor_DR <- c(cor_DR,mycorrelation_toplist(DR_agg,i,"pearson"))
-  cor_THOR <- c(cor_THOR,mycorrelation_toplist(THOR_agg,i,"pearson"))
-  cor_PePr <- c(cor_PePr,mycorrelation_toplist(PePr_agg,i,"pearson"))
-  
-}
-
-pdf(paste0(dataset,"correlation_toplist_summary_aggregated_2000.pdf"),width =12,height =12)
-par(mar = c(4, 5, 4, 4))
-#layout(matrix(c(1,2), 1, 2), widths=c(3,1))
-
-plot(cor_PePr ,lwd=4, col = "red",type="l", ylim=c(0,1), ylab ="Pearson correlation",xlab = " ", main=" ", xaxt="n",cex.axis =3, cex.lab=3)
-lines(cor_DB,  lwd=4, col="blue")
-lines(cor_DR,  lwd=4, col="green")
-lines(cor_THOR,  lwd=4,col="black")
-lines(cor_ROTS,lwd=4,col="orange")
-xtick<-seq(0, 20, by=5)
-xlabs<-seq(0,2000,500)
-axis(side=1, at=xtick,labels = FALSE)
-text(x=xtick,  par("usr")[3], 
-     labels = xlabs, pos = 1, xpd = TRUE, offset=2, cex=3)
-
-
 
 
 ### load to save time, the previous step is quite long
@@ -177,8 +126,8 @@ load("RData/RA_H3K4me3/toptableGR02GR01.RData")
 K4_toptable <- toptable
 
 
-
-call_super_scatter <- function(ROTS, DB,MAnorm, DR, THOR, PePr, toptable, xlim, ylim, dataset, inv){
+#function preprocessing the data for ATAC-seq and calling the plotting function
+call_super_scatter <- function(ROTS, DB,MAnorm, DR, THOR, PePr, toptable, xlim, ylim, dataset){
   ROTS <- as.data.frame(ROTS)
   DB <- as.data.frame(DB)
   MAnorm <- as.data.frame(MAnorm)
@@ -189,10 +138,6 @@ call_super_scatter <- function(ROTS, DB,MAnorm, DR, THOR, PePr, toptable, xlim, 
   PePr <- as.data.frame(PePr)
   PePr <- PePr[order(PePr$FDR, decreasing = F),]
   PePr$rank <- 1:dim(PePr)[1]
-  
-  if (inv==TRUE){
-    toptable$logFC <- toptable$logFC*(-1)
-  }
   
   ROTS <- merge(ROTS,toptable, by.x="gene_name",by.y="ID")
   ROTS <- ROTS[order(ROTS$rank, decreasing = F),]
@@ -275,7 +220,9 @@ call_super_scatter <- function(ROTS, DB,MAnorm, DR, THOR, PePr, toptable, xlim, 
     dev.off()
   }
 }
-call_super_scatterRA <- function(ROTS, DB,MAnorm, DR, THOR, PePr, toptable, xlim, ylim, dataset, inv){
+
+#function preprocessing the data for ChIP-seq and calling the plotting function
+call_super_scatterRA <- function(ROTS, DB,MAnorm, DR, THOR, PePr, toptable, xlim, ylim, dataset){
   ROTS <- as.data.frame(ROTS)
   DB <- as.data.frame(DB)
   MAnorm <- as.data.frame(MAnorm)
@@ -286,10 +233,6 @@ call_super_scatterRA <- function(ROTS, DB,MAnorm, DR, THOR, PePr, toptable, xlim
   PePr <- as.data.frame(PePr)
   PePr <- PePr[order(PePr$FDR, decreasing = F),]
   PePr$rank <- 1:dim(PePr)[1]
-  
-  if (inv==TRUE){
-    toptable$logFC <- toptable$logFC*(-1)
-  }
   
   ROTS <- merge(ROTS,toptable, by.x="Ensembl",by.y="ID")
   ROTS <- ROTS[order(ROTS$rank, decreasing = F),]
@@ -372,6 +315,11 @@ call_super_scatterRA <- function(ROTS, DB,MAnorm, DR, THOR, PePr, toptable, xlim
     dev.off()
   }
 }
+
+
+
+
+######main
 call_super_scatter(ROTS = YF_ROTS_anno,
                    DB = YF_DB_anno,
                    MAnorm = YF_MAnorm_anno,

@@ -1,6 +1,8 @@
+#this script create the density plots for the four dataset
+
 png("YF_density_pp.png", width = 1200,height = 1200)
 
-#Load the read counts, the counts are splited in 100 bins
+#Load the peaks for each software
 load("RData/YF_ATAC/YF_DR.RData")
 YF_DR <- DR
 load("RData/YF_ATAC/YF_DB_pp.RData")
@@ -14,18 +16,26 @@ YF_ROTS <- ROTS
 load("RData/YF_ATAC/YF_MAnorm_pp.RData")
 YF_MAnorm <- MAnorm
 
+
 peaks<- YF_ROTS
 soft <- "ROTS_pp"
+
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/YF_ATAC/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
 
+#create the figure
 plot(x=seq(-2000, 1960, length.out=100),
      y=colMeans(rbind(sumlist[[1]],sumlist[[2]])),
      ty='l',
@@ -35,14 +45,21 @@ plot(x=seq(-2000, 1960, length.out=100),
      xaxt="n",
      xlab=' ')
 
+
+
 peaks<- YF_MAnorm
 soft <- "MAnorm_pp"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/YF_ATAC/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -54,12 +71,17 @@ lines(x=seq(-2000, 1960, length.out=100),
 
 peaks<- YF_DR
 soft <- "DR"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/YF_ATAC/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -71,12 +93,17 @@ lines(x=seq(-2000, 1960, length.out=100),
 
 peaks<- YF_THOR
 soft <- "THOR"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/YF_ATAC/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -91,12 +118,17 @@ lines(x=seq(-2000, 1960, length.out=100),
 
 peaks<- YF_DB
 soft <- "DB_pp"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/YF_ATAC/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -109,12 +141,17 @@ lines(x=seq(-2000, 1960, length.out=100),
 
 peaks<- YF_PePr
 soft <- "PePr"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/YF_ATAC/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -129,6 +166,7 @@ dev.off()
 
 png("K36_density_pp.png", width = 1200,height = 1200)
 
+#Load the peaks for each software
 load("RData/RA_H3K36me3/K36_DR.RData")
 K36_DR <- DR
   load("RData/RA_H3K36me3/K36_DB_pp.RData")
@@ -144,16 +182,22 @@ K36_MAnorm <- MAnorm
 
 peaks<- K36_ROTS
 soft <- "ROTS_pp"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/RA_H3K36me3/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
 
+#create the figure
 plot(x=seq(-2000, 1960, length.out=100),
      y=colMeans(rbind(sumlist[[1]],sumlist[[2]])),
      ty='l',
@@ -166,12 +210,17 @@ plot(x=seq(-2000, 1960, length.out=100),
 
 peaks<- K36_MAnorm
 soft <- "MAnorm_pp"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/RA_H3K36me3/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -183,12 +232,17 @@ lines(x=seq(-2000, 1960, length.out=100),
 
 peaks<- K36_DR
 soft <- "DR"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/RA_H3K36me3/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -200,12 +254,17 @@ lines(x=seq(-2000, 1960, length.out=100),
 
 peaks<- K36_THOR
 soft <- "THOR"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/RA_H3K36me3/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -218,12 +277,17 @@ lines(x=seq(-2000, 1960, length.out=100),
 
 peaks<- K36_DB
 soft <- "DB_pp"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/RA_H3K36me3/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -236,12 +300,17 @@ lines(x=seq(-2000, 1960, length.out=100),
 
 peaks<- K36_PePr
 soft <- "PePr"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/RA_H3K36me3/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -255,7 +324,7 @@ dev.off()
 
 
 png("K4_density_pp.png", width = 1200,height = 1200)
-
+#Load the peaks for each software
 load("RData/RA_H3K4me3/K4_DR.RData")
 K4_DR <- DR
 load("RData/RA_H3K4me3/K4_DB_pp.RData")
@@ -271,16 +340,22 @@ K4_MAnorm <- MAnorm
 
 peaks<- K4_THOR
 soft <- "THOR"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/RA_H3K4me3/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
 
+#create the figure
 plot(x=seq(-2000, 1960, length.out=100),
      y=colMeans(rbind(sumlist[[1]],sumlist[[2]])),
      ty='l',
@@ -293,12 +368,17 @@ plot(x=seq(-2000, 1960, length.out=100),
 
 peaks<- K4_ROTS
 soft <- "ROTS_pp"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/RA_H3K4me3/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -310,12 +390,17 @@ lines(x=seq(-2000, 1960, length.out=100),
 
 peaks<- K4_MAnorm
 soft <- "MAnorm_pp"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/RA_H3K4me3/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -327,12 +412,17 @@ lines(x=seq(-2000, 1960, length.out=100),
 
 peaks<- K4_DR
 soft <- "DR"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/RA_H3K4me3/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -345,12 +435,17 @@ lines(x=seq(-2000, 1960, length.out=100),
 
 peaks<- K4_DB
 soft <- "DB_pp"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/RA_H3K4me3/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -363,12 +458,17 @@ lines(x=seq(-2000, 1960, length.out=100),
 
 peaks<- K4_PePr
 soft <- "PePr"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/RA_H3K4me3/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 1955,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -382,7 +482,7 @@ dev.off()
 
 
 png("IFN_density_pp.png", width = 1200,height = 1200)
-
+#Load the peaks for each software
 load("RData/IFN_ATAC/IFN_DR.RData")
 IFN_DR <- DR
 load("RData/IFN_ATAC/IFN_DB_pp.RData")
@@ -398,16 +498,22 @@ IFN_MAnorm <- MAnorm
 
 peaks<- IFN_THOR
 soft <- "THOR"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/IFN_ATAC/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
 
+#create the figure
 plot(x=seq(-2000, 1960, length.out=100),
      y=colMeans(rbind(sumlist[[1]],sumlist[[2]])),
      ty='l',
@@ -420,12 +526,17 @@ plot(x=seq(-2000, 1960, length.out=100),
 
 peaks<- IFN_ROTS
 soft <- "ROTS_pp"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/IFN_ATAC/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -437,12 +548,17 @@ lines(x=seq(-2000, 1960, length.out=100),
 
 peaks<- IFN_MAnorm
 soft <- "MAnorm_pp"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/IFN_ATAC/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -457,12 +573,17 @@ lines(x=seq(-2000, 1960, length.out=100),
 
 peaks<- IFN_DR
 soft <- "DR"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/IFN_ATAC/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -475,12 +596,17 @@ lines(x=seq(-2000, 1960, length.out=100),
 
 peaks<- IFN_DB
 soft <- "DB_pp"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/IFN_ATAC/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)
@@ -493,12 +619,17 @@ lines(x=seq(-2000, 1960, length.out=100),
 
 peaks<- IFN_PePr
 soft <- "PePr"
+# the 4000bp region is splited in 100 bins where the reads are counted.
 nbtiles<-100
+
+# processing of the peaks and ordering them by size and fold change
 peaks <- cbind(names(peaks),data.frame(peaks))
 peaks$order <- c(1:dim(peaks)[1])
 peaksFCup <- peaks[which(peaks$fc >= 0),]
 peaksFCdn <- peaks[which(peaks$fc < 0),]
 myorder <- rbind(peaksFCup[order(peaksFCup$width),],peaksFCdn[order(peaksFCdn$width),])
+
+# load the read counts
 load(paste0("RData/IFN_ATAC/matrices_",soft,"_4000bp.RData"))
 dat <- matrix(data=c(10),nrow = 2000,ncol = 100)
 sumlist <- list(Reduce('+',matrices[1:8])/dat,Reduce('+',matrices[9:16])/dat)

@@ -1,7 +1,9 @@
+#Create the data object
 mydata <- data.frame()
 colnames(mydata) <- c("time", "memory")
 rownames(mydata) <- c("ROTS", "DiffBind","MAnorm2", "diffReps","PePr", "THOR")
 
+#Fill the datta object with the memory and execution time values
 mydata["ROTS","time"] <- 31
 mydata["ROTS","memory"] <- 1.23
 mydata["DiffBind","time"] <- 100
@@ -15,6 +17,8 @@ mydata["PePr","memory"] <- 2.35
 mydata["THOR","time"] <- 164
 mydata["THOR","memory"] <- 10.05
 
+# Creation of a secondary data object to place the text
+# on the figure
 mydata2 <- mydata
 mydata2$memory<- mydata2$memory+3
 mydata2["DiffBind","memory"]<-mydata2["DiffBind","memory"]-3
@@ -22,6 +26,7 @@ mydata2["DiffBind","time"]<-mydata2["DiffBind","time"]+110
 mydata2["diffReps","time"]<-mydata2["diffReps","time"]-70
 mydata2["ROTS","time"]<-mydata2["ROTS","time"]+50
 
+#Figure 1B
 png(filename = "time_vs_memory.png",height = 600,width = 600)
 par(mar=c(4,4,2,2))
 plot(mydata$time,mydata$memory,

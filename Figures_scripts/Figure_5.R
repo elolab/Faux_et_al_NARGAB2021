@@ -1,5 +1,5 @@
 
-plot_correlation <- function(ROTS_anno,DB_anno,MA_anno,DR_anno,PePr_anno,THOR_anno,toptable,inv,dataset,option){
+plot_correlation <- function(ROTS_anno,DB_anno,MA_anno,DR_anno,PePr_anno,THOR_anno,toptable,dataset,option){
 ROTS <- as.data.frame(ROTS_anno)
 DB <- as.data.frame(DB_anno)
 MAnorm <- as.data.frame(MA_anno)
@@ -12,14 +12,6 @@ THOR$rank <- 1:dim(THOR)[1]
 PePr <- as.data.frame(PePr_anno)
 PePr <- PePr[order(PePr$FDR, decreasing = F),]
 PePr$rank <- 1:dim(PePr)[1]
-#load("RData/YF_ATAC/toptableGR02GR03.RData")
-###############################################################################
-## The RNA-seq experiment was run the wrong way around hence the 
-## multiplication by -1
-if (inv==TRUE){
-  toptable$logFC <- toptable$logFC*(-1)
-}
-
 
 ###############################################################################
 ## make an average of the Fold change for the multiple peakse annotated to the
@@ -87,6 +79,8 @@ cor_MA <- c()
 cor_DR <- c()
 cor_THOR <- c()
 cor_PePr <- c()
+
+#fill the objects with correlation values
 for(i in seq(100,2000,100)){
   cor_ROTS <- c(cor_ROTS,mycorrelation_toplist(ROTS_agg,i,"pearson"))
   cor_DB <- c(cor_DB,mycorrelation_toplist(DB_agg,i,"pearson"))
@@ -97,6 +91,7 @@ for(i in seq(100,2000,100)){
   
 }
 
+#plot the correlations curves
 pdf(paste0(dataset,"correlation_toplist_narrow_pooledpeaks_aggregated_2000.pdf"),width =12,height =12)
 par(mar = c(4, 5, 4, 4))
 
@@ -180,10 +175,11 @@ K4_DR_anno <- DR_anno
 load("RData/RA_H3K4me3/toptableGR02GR01.RData")
 K4_toptable <- toptable
 
-plot_correlation(YF_ROTS_anno,YF_DB_anno,YF_MAnorm_anno,YF_DR_anno,YF_PePr_anno,YF_THOR_anno,YF_toptable,TRUE,"YF","gene_name")
-plot_correlation(IFN_ROTS_anno,IFN_DB_anno,IFN_MAnorm_anno,IFN_DR_anno,IFN_PePr_anno,IFN_THOR_anno,IFN_toptable,FALSE,"IFN","gene_name")
-plot_correlation(K4_ROTS_anno,K4_DB_anno,K4_MAnorm_anno,K4_DR_anno,K4_PePr_anno,K4_THOR_anno,K4_toptable,TRUE,"K4","Ensembl")
-plot_correlation(K36_ROTS_anno,K36_DB_anno,K36_MAnorm_anno,K36_DR_anno,K36_PePr_anno,K36_THOR_anno,K36_toptable,TRUE,"K36","Ensembl")
+###main
+plot_correlation(YF_ROTS_anno,YF_DB_anno,YF_MAnorm_anno,YF_DR_anno,YF_PePr_anno,YF_THOR_anno,YF_toptable,"YF","gene_name")
+plot_correlation(IFN_ROTS_anno,IFN_DB_anno,IFN_MAnorm_anno,IFN_DR_anno,IFN_PePr_anno,IFN_THOR_anno,IFN_toptable,"IFN","gene_name")
+plot_correlation(K4_ROTS_anno,K4_DB_anno,K4_MAnorm_anno,K4_DR_anno,K4_PePr_anno,K4_THOR_anno,K4_toptable,"K4","Ensembl")
+plot_correlation(K36_ROTS_anno,K36_DB_anno,K36_MAnorm_anno,K36_DR_anno,K36_PePr_anno,K36_THOR_anno,K36_toptable,"K36","Ensembl")
 
 
 

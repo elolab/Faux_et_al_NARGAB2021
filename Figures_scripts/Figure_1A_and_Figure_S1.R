@@ -194,7 +194,7 @@ write.table(x = data,
             sep = "\t" )
 
 #############################################################
-###             Supplementary figure 1                    ###
+###             Supplementary Figure S1                   ###
 #############################################################
 
 png(file="20212911_ROC_pvalues.png",height = 600,width = 600)

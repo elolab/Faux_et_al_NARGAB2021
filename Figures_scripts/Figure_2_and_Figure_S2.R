@@ -162,6 +162,7 @@ main_function <- function(DB, ROTS, MAnorm, DR, PePr, THOR, name="generic_name",
 
 }
 
+#Call the main function
 YF_2000 <- main_function(YF_DB,YF_ROTS,YF_MAnorm,YF_DR,YF_PePr,YF_THOR,"YF_",switch =1)
 IFN_2000 <- main_function(IFN_DB,IFN_ROTS,IFN_MAnorm,IFN_DR,IFN_PePr,IFN_THOR,"IFN_",switch =1)
 K4_2000 <- main_function(K4_DB,K4_ROTS,K4_MAnorm,K4_DR,K4_PePr,K4_THOR,"K4_",switch =1)
